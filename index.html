@@ -1,0 +1,297 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Smart Task Planner - AI Project Management</title>
+    <link
+      rel="icon"
+      type="image/png"
+      href="https://static.vecteezy.com/system/resources/thumbnails/022/418/057/small_2x/project-task-management-and-effective-time-planning-tools-project-development-icon-3d-vector-illustration-png.png"
+    />
+    <script src="https://cdn.jsdelivr.net/npm/mermaid@10/dist/mermaid.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/chart.js@4.4.0/dist/chart.umd.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/html2pdf.js/0.10.1/html2pdf.bundle.min.js"></script>
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css"
+    />
+    <link rel="stylesheet" href="style.css" />
+  </head>
+  <body>
+    <button class="toggle-sidebar" id="toggleSidebar">
+      <i class="fas fa-bars"></i>
+    </button>
+
+    <aside class="sidebar" id="sidebar">
+      <div class="sidebar-header">
+        <h2>Task Planner</h2>
+        <p>AI-Powered Project Management</p>
+      </div>
+
+      <div class="api-key-section">
+        <h4>Gemini API Configuration</h4>
+        <div class="form-group" style="margin-bottom: 15px">
+          <label style="color: var(--text-light); font-size: 0.8em"
+            >API Key</label
+          >
+          <input
+            type="password"
+            class="api-key-input"
+            id="apiKeyInput"
+            placeholder="Enter your Gemini API key"
+          />
+        </div>
+        <div class="form-group" style="margin-bottom: 10px">
+          <label style="color: var(--text-light); font-size: 0.8em"
+            >Model URL</label
+          >
+          <input
+            type="text"
+            class="api-key-input"
+            id="modelUrlInput"
+            placeholder="Enter your URL here"
+          />
+        </div>
+        <p style="font-size: 0.75em; color: var(--text-light); margin-top: 8px">
+          Get your API key from
+          <a
+            href="https://aistudio.google.com/"
+            target="_blank"
+            style="color: var(--primary-light)"
+            >Google AI Studio</a
+          >
+        </p>
+      </div>
+
+      <div class="projects-list">
+        <div class="projects-header">
+          <h3>Projects</h3>
+          <button class="new-project-btn" id="newProjectBtn">
+            <i class="fas fa-plus"></i> New
+          </button>
+        </div>
+        <div id="projectsList"></div>
+      </div>
+    </aside>
+
+    <main class="main-content" id="mainContent">
+      <div class="container">
+        <div class="section" id="inputSection">
+          <div class="form-row">
+            <div class="form-column">
+              <div class="hero-section">
+                <h1>Smart Task Planner</h1>
+                <p>
+                  Transform your goals into actionable plans with AI-powered
+                  project management
+                </p>
+              </div>
+
+              <div class="form-group">
+                <label
+                  ><i class="fas fa-bullseye"></i> Project Goal / Description
+                  *</label
+                >
+                <textarea
+                  id="goalInput"
+                  placeholder="e.g., Launch a mobile app in 2 weeks, Build an e-commerce website, Plan a marketing campaign"
+                >
+build a mobile app for a food delivery service</textarea
+                >
+              </div>
+            </div>
+
+            <div class="form-column">
+              <div class="form-group">
+                <label><i class="fas fa-clock"></i> Project Duration</label>
+                <input
+                  type="text"
+                  id="durationInput"
+                  placeholder="e.g., 2 weeks, 3 months"
+                  value="2 months"
+                />
+              </div>
+
+              <div class="form-group">
+                <label><i class="fas fa-calendar-alt"></i> Start Date</label>
+                <input type="date" id="startDateInput" value="2025-10-20" />
+              </div>
+
+              <div class="form-group">
+                <label><i class="fas fa-calendar-check"></i> End Date</label>
+                <input type="date" id="endDateInput" value="2025-12-20" />
+              </div>
+
+              <div class="form-group">
+                <label><i class="fas fa-users"></i> Team Size</label>
+                <input
+                  type="number"
+                  id="teamSizeInput"
+                  placeholder="Number of team members"
+                  min="1"
+                  value="40"
+                />
+              </div>
+
+              <div class="form-group">
+                <label><i class="fas fa-briefcase"></i> Project Type</label>
+                <select id="projectTypeInput">
+                  <option value="">Select type</option>
+                  <option value="software" selected>
+                    Software Development
+                  </option>
+                  <option value="marketing">Marketing Campaign</option>
+                  <option value="product">Product Launch</option>
+                  <option value="event">Event Planning</option>
+                  <option value="research">Research Project</option>
+                  <option value="construction">Construction</option>
+                  <option value="custom">Other</option>
+                </select>
+              </div>
+
+              <div class="form-group">
+                <label
+                  ><i class="fas fa-project-diagram"></i> Planning
+                  Methodology</label
+                >
+                <select id="methodologyInput">
+                  <option value="">Select methodology</option>
+                  <option value="agile">Agile/Scrum</option>
+                  <option value="waterfall" selected>Waterfall</option>
+                  <option value="kanban">Kanban</option>
+                  <option value="lean">Lean</option>
+                  <option value="hybrid">Hybrid</option>
+                </select>
+              </div>
+            </div>
+          </div>
+
+          <button class="btn-primary" id="generateBtn">
+            <i class="fas fa-magic"></i> <span>Generate Project Plan</span>
+          </button>
+        </div>
+
+        <div id="alertContainer"></div>
+
+        <div class="results-section" id="resultsSection">
+          <div class="section">
+            <div class="section-header">
+              <h2><i class="fas fa-chart-line"></i> Project Overview</h2>
+              <div class="export-buttons">
+                <button class="btn-secondary" id="exportPdfBtn">
+                  <i class="fas fa-file-pdf"></i> Export PDF
+                </button>
+                <button class="btn-secondary" id="exportJsonBtn">
+                  <i class="fas fa-file-code"></i> Export JSON
+                </button>
+                <button class="btn-secondary" id="exportCsvBtn">
+                  <i class="fas fa-file-csv"></i> Export CSV
+                </button>
+              </div>
+            </div>
+
+            <div class="stats-grid" id="statsGrid"></div>
+
+            <div id="summaryContent"></div>
+          </div>
+
+          <div class="section">
+            <div class="tabs">
+              <button class="tab active" data-tab="tasks">
+                <i class="fas fa-tasks"></i> Tasks
+              </button>
+              <button class="tab" data-tab="gantt">
+                <i class="fas fa-chart-bar"></i> Gantt Chart
+              </button>
+              <button class="tab" data-tab="wbs">
+                <i class="fas fa-sitemap"></i> WBS
+              </button>
+              <button class="tab" data-tab="flowchart">
+                <i class="fas fa-project-diagram"></i> Flowchart
+              </button>
+              <button class="tab" data-tab="analytics">
+                <i class="fas fa-chart-pie"></i> Analytics
+              </button>
+            </div>
+
+            <div class="tab-content active" id="tasksTab">
+              <div class="task-list" id="taskList"></div>
+            </div>
+
+            <div class="tab-content" id="ganttTab">
+              <div class="mermaid-container">
+                <div class="mermaid" id="ganttChart"></div>
+              </div>
+            </div>
+
+            <div class="tab-content" id="wbsTab">
+              <div class="mermaid-container">
+                <div class="mermaid" id="wbsChart"></div>
+              </div>
+            </div>
+
+            <div class="tab-content" id="flowchartTab">
+              <div class="mermaid-container">
+                <div class="mermaid" id="flowChart"></div>
+              </div>
+            </div>
+
+            <div class="tab-content" id="analyticsTab">
+              <div class="chart-container">
+                <canvas id="priorityChart"></canvas>
+              </div>
+              <div class="chart-container">
+                <canvas id="timelineChart"></canvas>
+              </div>
+            </div>
+          </div>
+
+          <div class="section modification-section">
+            <h3><i class="fas fa-edit"></i> Modify Project Plan</h3>
+            <div class="form-group">
+              <label>Describe Changes Needed</label>
+              <textarea
+                id="modificationInput"
+                placeholder="e.g., Add more buffer time, Include marketing tasks, Reduce team size"
+              ></textarea>
+            </div>
+            <button class="btn-primary" id="modifyBtn">
+              <i class="fas fa-sync"></i> <span>Update Plan</span>
+            </button>
+          </div>
+
+          <div class="calendar-section" id="calendarSection">
+            <div class="section-header">
+              <h2><i class="fas fa-calendar-alt"></i> Project Calendar</h2>
+              <div>
+                <button class="btn-secondary" id="prevMonthBtn">
+                  <i class="fas fa-chevron-left"></i>
+                </button>
+                <span
+                  id="currentMonth"
+                  style="margin: 0 15px; font-weight: 600"
+                ></span>
+                <button class="btn-secondary" id="nextMonthBtn">
+                  <i class="fas fa-chevron-right"></i>
+                </button>
+              </div>
+            </div>
+            <div id="calendarContainer"></div>
+          </div>
+        </div>
+      </div>
+    </main>
+
+    <div class="loading-overlay" id="loadingOverlay">
+      <div class="loading-content">
+        <div class="spinner"></div>
+        <h3>Generating Your Project Plan...</h3>
+        <p>
+          AI is analyzing your requirements and creating a comprehensive plan
+        </p>
+      </div>
+    </div>
+    <script src="/script.js"></script>
+  </body>
+</html>
