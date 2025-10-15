@@ -18,7 +18,7 @@ Smart Task Planner leverages Google's Gemini AI to analyze project goals and aut
 - **Visual Project Analytics**: Interactive Gantt charts, Work Breakdown Structures, and flowcharts
 - **Real-Time Modifications**: Iteratively refine plans through natural language instructions
 - **Comprehensive Export Options**: Generate PDF reports, JSON data exports, and CSV task lists
-- **ject Portfolio Management**: Persistent storage and management of multiple jects
+- **Project Portfolio Management**: Persistent storage and management of multiple projects
 - **Interactive Calendar View**: Visual task distribution across project timeline
 
 ## Screenshots
