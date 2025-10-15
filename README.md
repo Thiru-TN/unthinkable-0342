@@ -21,13 +21,12 @@ Smart Task Planner leverages Google's Gemini AI to analyze project goals and aut
 
 ## Screenshots
 
-[Add your 4 screenshots here with descriptive captions]
 
 ```
-![Project Overview Dashboard](screenshots/dashboard.jpg)
-![Task Management Interface](screenshots/tasks.jpg)
-![Gantt Chart Visualization](screenshots/wbs.jpg)
-![Analytics Dashboard](screenshots/analytics.jpg)
+![Project Overview Dashboard](screenshots/dashboard.png)
+![Task Management Interface](screenshots/tasks.png)
+![WBS Chart Visualization](screenshots/wbs.jpeg)
+![Analytics Dashboard](screenshots/analytics.png)
 ```
 
 ## Technical Architecture
