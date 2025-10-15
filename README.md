@@ -2,7 +2,7 @@
 
 An AI-powered project management system that transforms high-level goals into comprehensive, actionable project plans with intelligent task breakdown, dependency analysis, and visual timeline generation.
 
-[![Demo Video](https://img.shields.io/badge/Demo-Watch%20Video-red?style=for-the-badge&logo=youtube)](YOUR_VIDEO_LINK_HERE)
+[![Demo Video](https://drive.google.com/file/d/1bFNO4D1xs0X87xg-RnCZfEr_wE0WRfXo/view?usp=sharing)](https://drive.google.com/file/d/1bFNO4D1xs0X87xg-RnCZfEr_wE0WRfXo/view?usp=sharing)
 
 ## Overview
 
