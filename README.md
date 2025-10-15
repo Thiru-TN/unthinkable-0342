@@ -2,7 +2,7 @@
 
 An AI-powered project management system that transforms high-level goals into comprehensive, actionable project plans with intelligent task breakdown, dependency analysis, and visual timeline generation.
 
-[![Demo Video](https://drive.google.com/file/d/1bFNO4D1xs0X87xg-RnCZfEr_wE0WRfXo/view?usp=sharing)](https://drive.google.com/file/d/1bFNO4D1xs0X87xg-RnCZfEr_wE0WRfXo/view?usp=sharing)
+[![Watch Demo Video](screenshots/dashboard.png)](https://drive.google.com/file/d/1bFNO4D1xs0X87xg-RnCZfEr_wE0WRfXo/view?usp=sharing)
 
 ## Overview
 
